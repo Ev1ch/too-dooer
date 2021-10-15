@@ -1,0 +1,12 @@
+.icon {
+  user-select: none;
+  display: inline-flex;
+
+  &Image {
+    margin: auto;
+    object-fit: cover;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+}
