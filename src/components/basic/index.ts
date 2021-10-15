@@ -1,5 +1,3 @@
-import Icon from './icon';
-import Checkbox from './checkbox';
-import AddButton from './add-button';
-
-export default { Icon, Checkbox, AddButton };
+export { default as Icon } from './icon';
+export { default as Checkbox } from './checkbox';
+export { default as AddButton } from './add-button';
