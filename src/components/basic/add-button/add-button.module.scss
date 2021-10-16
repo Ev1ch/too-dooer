@@ -13,11 +13,6 @@
   transition: var(--base-time);
   cursor: pointer;
 
-  &Icon {
-    width: 20px;
-    height: 20px;
-  }
-
   &:hover {
     transform: scale(1.02);
   }

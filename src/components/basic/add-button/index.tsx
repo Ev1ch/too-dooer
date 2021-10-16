@@ -18,7 +18,7 @@ function AddButton({ className, onClick }: IButtonProps): JSX.Element {
 
   return (
     <button className={clsx(styles.addButton, className)} type="button" aria-label="+" onClick={onClickHandler}>
-      <Icon icon={Icons.PLUS} className={styles.addButtonIcon} />
+      <Icon icon={Icons.PLUS} className={styles.addButtonIcon} width={20} height={20} />
     </button>
   );
 }

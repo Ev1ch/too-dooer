@@ -5,12 +5,22 @@ import styles from './icon.module.scss';
 interface IIconProps {
   icon: string;
   className?: string;
+  width?: number;
+  height?: number;
 }
 
-function Icon({ icon, className }: IIconProps): JSX.Element {
+function Icon({ icon, className, height, width }: IIconProps): JSX.Element {
   return (
     <div className={clsx(styles.icon, className)}>
-      <img src={icon} alt="" className={styles.iconImage} />
+      <img
+        src={icon}
+        alt=""
+        className={styles.iconImage}
+        style={{
+          height,
+          width,
+        }}
+      />
     </div>
   );
 }

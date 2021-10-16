@@ -7,9 +7,10 @@ import styles from './checkbox.module.scss';
 interface ICheckboxProps {
   onChange?: (state: boolean) => void;
   state?: boolean;
+  className?: string;
 }
 
-function Checkbox({ onChange, state }: ICheckboxProps): JSX.Element {
+function Checkbox({ onChange, state, className }: ICheckboxProps): JSX.Element {
   const [isChecked, setIsChecked] = useState(state === undefined ? false : state);
 
   const onClickHandler = () => {
@@ -21,8 +22,8 @@ function Checkbox({ onChange, state }: ICheckboxProps): JSX.Element {
   };
 
   return (
-    <div className={clsx(styles.checkbox, isChecked && styles.checkboxChecked)} onClick={onClickHandler}>
-      <Icon icon={Icons.TICK} className={styles.checkboxIcon} />
+    <div className={clsx(styles.checkbox, isChecked && styles.checkboxChecked, className)} onClick={onClickHandler}>
+      <Icon icon={Icons.TICK} className={styles.checkboxIcon} height={10} width={10} />
     </div>
   );
 }
