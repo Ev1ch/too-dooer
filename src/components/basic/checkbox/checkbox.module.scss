@@ -6,6 +6,9 @@
   text-align: center;
   cursor: pointer;
   transition: var(--base-time);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &Icon {
     transition: var(--base-time);
