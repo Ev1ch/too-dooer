@@ -9,7 +9,7 @@ interface IButtonProps {
   onClick?: (event?: MouseEvent<HTMLElement>) => void;
 }
 
-function AddButton({ className, onClick }: IButtonProps) {
+function AddButton({ className, onClick }: IButtonProps): JSX.Element {
   const onClickHandler = (event: MouseEvent<HTMLElement>) => {
     if (onClick) {
       onClick(event);
@@ -17,12 +17,7 @@ function AddButton({ className, onClick }: IButtonProps) {
   };
 
   return (
-    <button
-      className={clsx(styles.addButton, className)}
-      type="button"
-      aria-label="+"
-      onClick={onClickHandler}
-    >
+    <button className={clsx(styles.addButton, className)} type="button" aria-label="+" onClick={onClickHandler}>
       <Icon icon={Icons.PLUS} className={styles.addButtonIcon} />
     </button>
   );

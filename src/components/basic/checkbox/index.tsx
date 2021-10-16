@@ -9,23 +9,8 @@ interface ICheckboxProps {
   state?: boolean;
 }
 
-function Checkbox({ onChange, state }: ICheckboxProps) {
-  const [isChecked, setIsChecked] = useState(
-    state === undefined ? false : state,
-  );
-
-  const [isFocused, setIsFocused] = useState(false);
-  const onFocusHanlder = () => {
-    setIsFocused(true);
-  };
-  const onBlurHanlder = () => {
-    setIsFocused(false);
-  };
-  const onKeyPressHandler = () => {
-    if (isFocused) {
-      setIsChecked(true);
-    }
-  };
+function Checkbox({ onChange, state }: ICheckboxProps): JSX.Element {
+  const [isChecked, setIsChecked] = useState(state === undefined ? false : state);
 
   const onClickHandler = () => {
     setIsChecked((previousState) => !previousState);
@@ -36,16 +21,7 @@ function Checkbox({ onChange, state }: ICheckboxProps) {
   };
 
   return (
-    <div
-      className={clsx(styles.checkbox, isChecked && styles.checkboxChecked)}
-      onClick={onClickHandler}
-      onFocus={onFocusHanlder}
-      onBlur={onBlurHanlder}
-      onKeyPress={onKeyPressHandler}
-      role="checkbox"
-      aria-checked={isChecked}
-      tabIndex={-1}
-    >
+    <div className={clsx(styles.checkbox, isChecked && styles.checkboxChecked)} onClick={onClickHandler}>
       <Icon icon={Icons.TICK} className={styles.checkboxIcon} />
     </div>
   );

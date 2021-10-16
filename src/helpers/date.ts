@@ -1,4 +1,4 @@
-function getMonthName(date: Date) {
+function getMonthName(date: Date): string {
   const monthNames = [
     'January',
     'February',

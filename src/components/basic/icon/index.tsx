@@ -7,7 +7,7 @@ interface IIconProps {
   className?: string;
 }
 
-function Icon({ icon, className }: IIconProps) {
+function Icon({ icon, className }: IIconProps): JSX.Element {
   return (
     <div className={clsx(styles.icon, className)}>
       <img src={icon} alt="" className={styles.iconImage} />
