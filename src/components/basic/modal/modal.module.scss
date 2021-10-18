@@ -1,0 +1,50 @@
+.modal {
+  margin: auto;
+  padding: 10px;
+  border-radius: 5px;
+  width: 600px;
+  background-color: var(--contrast-light-color);
+  box-shadow: 0 0 20px rgba(var(--darker-color-rgb), 0.1);
+
+  &Header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+
+  &Title {
+    font: 700 18px var(--base-font-family);
+    color: var(--dark-color);
+  }
+
+  &Close {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  &Container {
+    z-index: 0;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(1px);
+    background-color: rgba($color: var(--darker-color-rgb), $alpha: 0.5);
+    transition: var(--base-time);
+  }
+
+  &Active {
+    display: flex;
+    z-index: 999;
+  }
+
+  &Content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
