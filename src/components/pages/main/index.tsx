@@ -1,0 +1,89 @@
+import React, { useState } from 'react';
+import clsx from 'clsx';
+import { INewTodoItem, ITodoItem } from 'types';
+import { TodoList, AddButton, AddTodoModal, Divider } from 'components';
+import { getMonthName } from 'helpers';
+import styles from './main.module.scss';
+
+interface IMainProps {
+  currentDate: Date;
+  notDoneItems: ITodoItem[];
+  doneItems: ITodoItem[];
+  onTodoStateChange?: (id: string) => void;
+  onTodoDelete?: (id: string) => void;
+  onTodoEdit?: (id: string, updatedTodo: Partial<ITodoItem>) => void;
+  onTodoAdd?: (todo: INewTodoItem) => boolean;
+}
+
+function MainPage({
+  currentDate,
+  notDoneItems,
+  doneItems,
+  onTodoStateChange,
+  onTodoDelete,
+  onTodoEdit,
+  onTodoAdd,
+}: IMainProps): JSX.Element {
+  const date = `${getMonthName(currentDate)} ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
+  const [isFormActive, setIsFormActive] = useState(false);
+
+  const onTodoAddHandler = (todo: INewTodoItem) => {
+    if (onTodoAdd) {
+      const isAdded = onTodoAdd(todo);
+
+      if (isAdded) {
+        setIsFormActive(false);
+      }
+    }
+  };
+
+  const onOpenFormHandler = () => {
+    setIsFormActive(true);
+  };
+
+  const onCloseFormHandler = () => {
+    setIsFormActive(false);
+  };
+
+  return (
+    <div className={styles.main}>
+      <AddTodoModal onSubmit={onTodoAddHandler} state={isFormActive} onClose={onCloseFormHandler} />
+      <div className={clsx('container', styles.mainContainer)}>
+        <header className={styles.mainHeader}>
+          <h1 className={styles.mainTitle}>{date}</h1>
+          <div className={styles.mainDescription}>
+            <p>
+              {notDoneItems.length} incomplete, {doneItems.length} completed.
+            </p>
+          </div>
+          <Divider />
+        </header>
+        <main className={styles.mainSections}>
+          <section className={styles.mainSection}>
+            <h2 className={styles.mainSectionTitle}>Incomplete</h2>
+            <TodoList
+              onTodoStateChange={onTodoStateChange}
+              onTodoDelete={onTodoDelete}
+              onTodoEdit={onTodoEdit}
+              items={notDoneItems}
+            />
+          </section>
+          <section className={styles.mainSection}>
+            <h2 className={styles.mainSectionTitle}>Completed</h2>
+            <TodoList
+              onTodoStateChange={onTodoStateChange}
+              onTodoDelete={onTodoDelete}
+              onTodoEdit={onTodoEdit}
+              items={doneItems}
+            />
+          </section>
+        </main>
+        <footer className={styles.mainFooter}>
+          <AddButton className={styles.mainAddButton} onClick={onOpenFormHandler} />
+        </footer>
+      </div>
+    </div>
+  );
+}
+
+export default MainPage;
