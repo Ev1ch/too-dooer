@@ -1,11 +1,4 @@
-import Basic from './basic';
-import Common from './common';
-import Pages from './pages';
-import Containers from './containers';
-
-export default {
-  Basic,
-  Common,
-  Pages,
-  Containers,
-};
+export * from './basic';
+export * from './common';
+export * from './pages';
+export * from './containers';
