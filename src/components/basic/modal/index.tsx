@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { MouseEvent, ReactNode, useEffect, useState } from 'react';
 import { Icon } from 'components';
 import Icons from 'components/basic/icon/icon-types';
 import styles from './modal.module.scss';
@@ -8,17 +8,17 @@ interface IModalProps {
   children?: ReactNode;
   state?: boolean;
   title?: string;
-  onClose?: () => void;
+  onClose?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 function Modal({ children, state, title, onClose }: IModalProps) {
   const [isActive, setIsActive] = useState(state === undefined ? true : state);
 
-  const onCloseHandler = () => {
+  const onCloseHandler = (event: MouseEvent<HTMLButtonElement>) => {
     setIsActive(false);
 
     if (onClose) {
-      onClose();
+      onClose(event);
     }
   };
 

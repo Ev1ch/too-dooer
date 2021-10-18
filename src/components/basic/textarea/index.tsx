@@ -4,7 +4,7 @@ import styles from './textarea.module.scss';
 
 interface ITextareaProps {
   className?: string;
-  onChange?: (value: string) => void;
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   placeholder?: string;
   defaultValue?: string;
   value?: string;
@@ -13,7 +13,7 @@ interface ITextareaProps {
 function Textarea({ className, onChange, placeholder, defaultValue, value }: ITextareaProps) {
   const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     if (onChange) {
-      onChange(event.target.value);
+      onChange(event);
     }
   };
 
@@ -24,7 +24,7 @@ function Textarea({ className, onChange, placeholder, defaultValue, value }: ITe
       className={clsx(styles.textarea, className)}
       defaultValue={defaultValue}
       value={value}
-    ></textarea>
+    />
   );
 }
 

@@ -4,7 +4,7 @@ import styles from './input.module.scss';
 
 interface IInputProps {
   className?: string;
-  onChange?: (value: string) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   defaultValue?: string;
   value?: string;
@@ -13,7 +13,7 @@ interface IInputProps {
 function Input({ className, onChange, placeholder, defaultValue, value }: IInputProps) {
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
-      onChange(event.target.value);
+      onChange(event);
     }
   };
 
@@ -24,6 +24,7 @@ function Input({ className, onChange, placeholder, defaultValue, value }: IInput
       className={clsx(styles.input, className)}
       onChange={onChangeHandler}
       placeholder={placeholder}
+      defaultValue={defaultValue}
     />
   );
 }
