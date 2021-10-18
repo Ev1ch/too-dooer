@@ -57,8 +57,10 @@
     padding: 0;
     cursor: pointer;
     transition: var(--base-time);
+    filter: grayscale(1);
 
     &:hover {
+      filter: none;
       transform: scale(1.02);
     }
   }
@@ -76,7 +78,7 @@
         display: none;
       }
 
-      &Delete {
+      &Button {
         opacity: 0.5;
 
         &:hover {
