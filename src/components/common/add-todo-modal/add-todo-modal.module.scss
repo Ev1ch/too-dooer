@@ -1,0 +1,21 @@
+.addTodoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &Title {
+    margin-top: 0;
+    margin-bottom: 4px;
+    font: 600 14px var(--base-font-family);
+    color: var(--dark-color);
+  }
+
+  &Input,
+  &Textarea {
+    width: 100%;
+  }
+
+  &Textarea {
+    height: 200px;
+  }
+}
