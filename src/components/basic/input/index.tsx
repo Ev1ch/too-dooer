@@ -10,7 +10,7 @@ interface IInputProps {
   value?: string;
 }
 
-function Input({ className, onChange, placeholder, defaultValue, value }: IInputProps) {
+function Input({ className, onChange, placeholder, defaultValue, value }: IInputProps): JSX.Element {
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
       onChange(event);

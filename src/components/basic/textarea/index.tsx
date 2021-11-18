@@ -10,7 +10,7 @@ interface ITextareaProps {
   value?: string;
 }
 
-function Textarea({ className, onChange, placeholder, defaultValue, value }: ITextareaProps) {
+function Textarea({ className, onChange, placeholder, defaultValue, value }: ITextareaProps): JSX.Element {
   const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     if (onChange) {
       onChange(event);

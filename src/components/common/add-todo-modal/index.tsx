@@ -9,7 +9,7 @@ interface IAddTodoModalProps {
   onSubmit: (todo: INewTodoItem) => void;
 }
 
-function AddTodoModal({ state, onClose, onSubmit }: IAddTodoModalProps) {
+function AddTodoModal({ state, onClose, onSubmit }: IAddTodoModalProps): JSX.Element {
   const initialTodo: INewTodoItem = { title: '', description: '' };
   const [todo, setTodo] = useState<INewTodoItem>(initialTodo);
 

@@ -11,7 +11,7 @@ interface IModalProps {
   onClose?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-function Modal({ children, state, title, onClose }: IModalProps) {
+function Modal({ children, state, title, onClose }: IModalProps): JSX.Element {
   const [isActive, setIsActive] = useState(state === undefined ? true : state);
 
   const onCloseHandler = (event: MouseEvent<HTMLButtonElement>) => {

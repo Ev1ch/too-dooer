@@ -6,7 +6,7 @@ interface IDividerProps {
   className?: string;
 }
 
-function Divider({ className }: IDividerProps) {
+function Divider({ className }: IDividerProps): JSX.Element {
   return <div className={clsx(styles.divider, className)}></div>;
 }
 

@@ -7,7 +7,7 @@ interface IButtonProps {
   disabled: boolean;
 }
 
-function Button({ children, onClick, disabled }: IButtonProps) {
+function Button({ children, onClick, disabled }: IButtonProps): JSX.Element {
   return (
     <button className={styles.button} onClick={onClick} disabled={disabled}>
       {children}
