@@ -12,7 +12,7 @@ interface IMainProps {
   onTodoStateChange?: (id: string) => void;
   onTodoDelete?: (id: string) => void;
   onTodoEdit?: (id: string, updatedTodo: Partial<ITodoItem>) => void;
-  onTodoAdd?: (todo: INewTodoItem) => boolean;
+  onTodoAdd?: (todo: INewTodoItem) => Promise<boolean>;
 }
 
 function MainPage({
@@ -27,9 +27,9 @@ function MainPage({
   const date = `${getMonthName(currentDate)} ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
   const [isFormActive, setIsFormActive] = useState(false);
 
-  const onTodoAddHandler = (todo: INewTodoItem) => {
+  const onTodoAddHandler = async (todo: INewTodoItem) => {
     if (onTodoAdd) {
-      const isAdded = onTodoAdd(todo);
+      const isAdded = await onTodoAdd(todo);
 
       if (isAdded) {
         setIsFormActive(false);
