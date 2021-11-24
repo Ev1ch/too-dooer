@@ -47,4 +47,17 @@ const EDIT_TODO = gql`
   }
 `;
 
-export { GET_TODOS, ADD_TODO, DELETE_TODO, EDIT_TODO };
+const SUBSCRIBE_TODOS = gql`
+  subscription MySubscription {
+    todos {
+      updated_at
+      title
+      status
+      id
+      description
+      created_at
+    }
+  }
+`;
+
+export { GET_TODOS, ADD_TODO, DELETE_TODO, EDIT_TODO, SUBSCRIBE_TODOS };
