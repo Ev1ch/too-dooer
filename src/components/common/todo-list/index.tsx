@@ -7,7 +7,7 @@ interface ITodoListProps {
   items: ITodoItem[];
   onTodoStateChange?: (id: string) => void;
   onTodoDelete?: (id: string) => void;
-  onTodoEdit?: (id: string, updatedTodo: Partial<ITodoItem>) => void;
+  onTodoEdit?: (id: string, updatedTodo: ITodoItem) => Promise<boolean>;
 }
 
 function TodoList({ items, onTodoStateChange, onTodoEdit, onTodoDelete }: ITodoListProps): JSX.Element {

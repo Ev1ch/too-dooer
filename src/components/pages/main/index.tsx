@@ -11,7 +11,7 @@ interface IMainProps {
   doneItems: ITodoItem[];
   onTodoStateChange?: (id: string) => void;
   onTodoDelete?: (id: string) => void;
-  onTodoEdit?: (id: string, updatedTodo: Partial<ITodoItem>) => void;
+  onTodoEdit?: (id: string, updatedTodo: ITodoItem) => Promise<boolean>;
   onTodoAdd?: (todo: INewTodoItem) => Promise<boolean>;
 }
 
