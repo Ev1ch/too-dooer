@@ -1,12 +1,12 @@
 import React from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import { ADD_TODO, DELETE_TODO, EDIT_TODO, GET_TODOS } from 'services';
+import { useMutation, useSubscription } from '@apollo/client';
+import { ADD_TODO, DELETE_TODO, EDIT_TODO, SUBSCRIBE_TODOS } from 'services';
 import { MainPage } from 'components';
 import { INewTodoItem, ITodoItem } from 'types';
 import { TodoStatuses } from 'common';
 
 function MainContainer(): JSX.Element {
-  const { data, refetch } = useQuery<{ todos: ITodoItem[] }>(GET_TODOS);
+  const { data } = useSubscription<{ todos: ITodoItem[] }>(SUBSCRIBE_TODOS);
   const [deleteTodo] = useMutation(DELETE_TODO);
   const [editTodo] = useMutation(EDIT_TODO);
   const [addTodo] = useMutation(ADD_TODO);
@@ -19,7 +19,6 @@ function MainContainer(): JSX.Element {
     if (existingTodo) {
       const updatedStatus = existingTodo.status === TodoStatuses.DONE ? TodoStatuses.NOT_DONE : TodoStatuses.DONE;
       await editTodo({ variables: { ...existingTodo, id, status: updatedStatus } });
-      await refetch();
     }
   };
 
@@ -28,17 +27,21 @@ function MainContainer(): JSX.Element {
 
     if (existingTodo) {
       await deleteTodo({ variables: { id } });
-      await refetch();
     }
   };
 
-  const onTodoEdit = async (id: string, todo: Partial<ITodoItem>) => {
+  const onTodoEdit = async (id: string, todo: ITodoItem) => {
+    if (todo.title.trim().length === 0) {
+      return false;
+    }
+
     const existingTodo = data?.todos.find((todo) => todo.id === id);
 
     if (existingTodo) {
-      await editTodo({ variables: { id, ...todo } });
-      await refetch();
+      await editTodo({ variables: { ...todo } });
     }
+
+    return true;
   };
 
   const onTodoAdd = async (todo: INewTodoItem) => {
@@ -51,8 +54,6 @@ function MainContainer(): JSX.Element {
         ...todo,
       },
     });
-
-    await refetch();
 
     return true;
   };
