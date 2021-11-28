@@ -34,7 +34,7 @@
     right: 0;
     bottom: 0;
     backdrop-filter: blur(1px);
-    background-color: rgba($color: var(--darker-color-rgb), $alpha: 0.5);
+    background-color: rgba(var(--darker-color-rgb), 0.5);
     transition: var(--base-time);
   }
 

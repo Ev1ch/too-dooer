@@ -1,15 +1,16 @@
 import React, { MouseEvent, useEffect, useState } from 'react';
-import { Modal, Input, Textarea, Button } from 'components';
+import { Modal, Input, Textarea, Button, Loader } from 'components';
 import { INewTodoItem } from 'types';
 import styles from './add-todo-modal.module.scss';
 
 interface IAddTodoModalProps {
   state?: boolean;
+  loaderState?: boolean;
   onClose?: () => void;
   onSubmit: (todo: INewTodoItem) => void;
 }
 
-function AddTodoModal({ state, onClose, onSubmit }: IAddTodoModalProps): JSX.Element {
+function AddTodoModal({ state, loaderState, onClose, onSubmit }: IAddTodoModalProps): JSX.Element {
   const initialTodo: INewTodoItem = { title: '', description: '' };
   const [todo, setTodo] = useState<INewTodoItem>(initialTodo);
 
@@ -27,6 +28,7 @@ function AddTodoModal({ state, onClose, onSubmit }: IAddTodoModalProps): JSX.Ele
   return (
     <Modal onClose={onClose} title="Add todo" state={state}>
       <form className={styles.addTodoForm}>
+        <Loader state={loaderState} className={styles.addTodoFormLoader} />
         <div>
           <p className={styles.addTodoFormTitle}>Title</p>
           <Input

@@ -26,14 +26,18 @@ function MainPage({
 }: IMainProps): JSX.Element {
   const date = `${getMonthName(currentDate)} ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
   const [isFormActive, setIsFormActive] = useState(false);
+  const [isAddFormLoader, setIsAddFormLoader] = useState(false);
 
   const onTodoAddHandler = async (todo: INewTodoItem) => {
     if (onTodoAdd) {
+      setIsAddFormLoader(true);
       const isAdded = await onTodoAdd(todo);
 
       if (isAdded) {
         setIsFormActive(false);
       }
+
+      setIsAddFormLoader(false);
     }
   };
 
@@ -47,7 +51,12 @@ function MainPage({
 
   return (
     <div className={styles.main}>
-      <AddTodoModal onSubmit={onTodoAddHandler} state={isFormActive} onClose={onCloseFormHandler} />
+      <AddTodoModal
+        onSubmit={onTodoAddHandler}
+        state={isFormActive}
+        loaderState={isAddFormLoader}
+        onClose={onCloseFormHandler}
+      />
       <div className={clsx('container', styles.mainContainer)}>
         <header className={styles.mainHeader}>
           <h1 className={styles.mainTitle}>{date}</h1>
