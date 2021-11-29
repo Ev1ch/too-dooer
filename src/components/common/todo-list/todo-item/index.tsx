@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Checkbox, Icon, Textarea, Input } from 'components';
 import Icons from 'components/basic/icon/icon-types';
@@ -8,15 +8,15 @@ import styles from './todo-item.module.scss';
 
 interface ITodoItemProps {
   item: ITodoItem;
-  onTodoStateChange?: (id: string) => void;
+  onTodoStateChange?: (id: string) => Promise<boolean>;
   onTodoDelete?: (id: string) => void;
   onTodoEdit?: (id: string, updatedTodo: ITodoItem) => Promise<boolean>;
 }
 
 function TodoItem({ item, onTodoStateChange, onTodoEdit, onTodoDelete }: ITodoItemProps): JSX.Element {
-  const onStateChangeHandler = () => {
+  const onStateChangeHandler = async () => {
     if (onTodoStateChange) {
-      onTodoStateChange(item.id);
+      await onTodoStateChange(item.id);
     }
   };
 

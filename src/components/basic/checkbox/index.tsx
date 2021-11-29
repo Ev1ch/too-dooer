@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Icon from '../icon';
 import Icons from '../icon/icon-types';
@@ -11,7 +11,14 @@ interface ICheckboxProps {
 }
 
 function Checkbox({ onChange, state, className }: ICheckboxProps): JSX.Element {
-  const [isChecked, setIsChecked] = useState(state === undefined ? false : state);
+  const [isChecked, setIsChecked] = useState(typeof state === 'boolean' ? state : false);
+
+  useEffect(() => {
+    console.log(state);
+    if (typeof state === 'boolean') {
+      setIsChecked(state);
+    }
+  }, [state]);
 
   const onClickHandler = () => {
     setIsChecked((previousState) => !previousState);

@@ -9,7 +9,7 @@ interface IMainProps {
   currentDate: Date;
   notDoneItems: ITodoItem[];
   doneItems: ITodoItem[];
-  onTodoStateChange?: (id: string) => void;
+  onTodoStateChange?: (id: string) => Promise<boolean>;
   onTodoDelete?: (id: string) => void;
   onTodoEdit?: (id: string, updatedTodo: ITodoItem) => Promise<boolean>;
   onTodoAdd?: (todo: INewTodoItem) => Promise<boolean>;

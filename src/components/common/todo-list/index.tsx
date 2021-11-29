@@ -5,7 +5,7 @@ import styles from './todo-list.module.scss';
 
 interface ITodoListProps {
   items: ITodoItem[];
-  onTodoStateChange?: (id: string) => void;
+  onTodoStateChange?: (id: string) => Promise<boolean>;
   onTodoDelete?: (id: string) => void;
   onTodoEdit?: (id: string, updatedTodo: ITodoItem) => Promise<boolean>;
 }
