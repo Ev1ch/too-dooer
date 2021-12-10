@@ -14,7 +14,6 @@ function Checkbox({ onChange, state, className }: ICheckboxProps): JSX.Element {
   const [isChecked, setIsChecked] = useState(typeof state === 'boolean' ? state : false);
 
   useEffect(() => {
-    console.log(state);
     if (typeof state === 'boolean') {
       setIsChecked(state);
     }
