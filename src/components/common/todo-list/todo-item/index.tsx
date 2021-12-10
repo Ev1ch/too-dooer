@@ -15,9 +15,7 @@ interface ITodoItemProps {
 
 function TodoItem({ item, onTodoStateChange, onTodoEdit, onTodoDelete }: ITodoItemProps): JSX.Element {
   const onStateChangeHandler = async () => {
-    if (onTodoStateChange) {
-      await onTodoStateChange(item.id);
-    }
+    onTodoStateChange && (await onTodoStateChange(item.id));
   };
 
   const [todo, setTodo] = useState({ ...item });
@@ -27,21 +25,19 @@ function TodoItem({ item, onTodoStateChange, onTodoEdit, onTodoDelete }: ITodoIt
     setIsFocused(true);
   };
   const onEditHandler = async () => {
-    if (onTodoEdit) {
-      const isEdited = await onTodoEdit(todo.id, todo);
+    if (!onTodoEdit) {
+      return;
+    }
 
-      if (isEdited) {
-        setIsFocused(false);
-      }
-    } else {
+    const isEdited = await onTodoEdit(todo.id, todo);
+
+    if (isEdited) {
       setIsFocused(false);
     }
   };
 
   const onDeleteHandler = () => {
-    if (onTodoDelete) {
-      onTodoDelete(todo.id);
-    }
+    onTodoDelete && onTodoDelete(todo.id);
   };
 
   return (

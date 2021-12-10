@@ -11,7 +11,7 @@ interface ICheckboxProps {
 }
 
 function Checkbox({ onChange, state, className }: ICheckboxProps): JSX.Element {
-  const [isChecked, setIsChecked] = useState(typeof state === 'boolean' ? state : false);
+  const [isChecked, setIsChecked] = useState(state ?? false);
 
   useEffect(() => {
     if (typeof state === 'boolean') {
@@ -22,9 +22,7 @@ function Checkbox({ onChange, state, className }: ICheckboxProps): JSX.Element {
   const onClickHandler = () => {
     setIsChecked((previousState) => !previousState);
 
-    if (onChange) {
-      onChange(isChecked);
-    }
+    onChange && onChange(isChecked);
   };
 
   return (

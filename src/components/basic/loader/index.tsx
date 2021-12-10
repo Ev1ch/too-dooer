@@ -9,7 +9,7 @@ interface ILoaderProps {
 }
 
 function Loader({ className, state }: ILoaderProps): JSX.Element {
-  const [isActive, setIsActive] = useState(state === undefined ? true : state);
+  const [isActive, setIsActive] = useState(state ?? true);
 
   useEffect(() => {
     setIsActive(state || false);
