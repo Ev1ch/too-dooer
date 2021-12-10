@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Loader, NotLoggedContainer } from 'components';
 import { client, splitLink } from 'index';
-import { setContext } from '@apollo/client/link/context';
+import { getAuthorizedLink } from 'helpers';
 
 interface IPrivateRouteProps {
   element: JSX.Element;
 }
 
 function PrivateRoute({ element }: IPrivateRouteProps): JSX.Element {
-  const { isAuthenticated, loginWithRedirect, isLoading, getAccessTokenSilently, user } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, isLoading, getIdTokenClaims } = useAuth0();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -17,19 +17,8 @@ function PrivateRoute({ element }: IPrivateRouteProps): JSX.Element {
     }
 
     if (isAuthenticated) {
-      console.log(user);
-      getAccessTokenSilently().then(() => {
-        const authLink = setContext((_, { headers }) => {
-          const token = localStorage.getItem('token');
-
-          return {
-            headers: {
-              ...headers,
-              Authorization: token ? `Bearer ${token}` : '',
-            },
-          };
-        });
-
+      getIdTokenClaims().then(({ __raw: token, sub: id }) => {
+        const authLink = getAuthorizedLink(token, id);
         client.setLink(authLink.concat(splitLink));
       });
     }
