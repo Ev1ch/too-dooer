@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { Auth0Provider } from '@auth0/auth0-react';
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
@@ -17,7 +18,7 @@ const wsLink = new WebSocketLink({
   },
 });
 
-const splitLink = split(
+export const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
     return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
@@ -26,16 +27,24 @@ const splitLink = split(
   httpLink,
 );
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: splitLink,
 });
 
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID as string;
+const domain = process.env.REACT_APP_AUTH0_DOMAIN as string;
+const location = window.location.origin;
+
+console.log(clientId, domain, location);
+
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <Auth0Provider domain={domain} clientId={clientId} redirectUri={location}>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </Auth0Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
