@@ -50,10 +50,10 @@ const EDIT_TODO = gql`
 const SUBSCRIBE_TODOS = gql`
   subscription MySubscription {
     todos {
+      id
       updated_at
       title
       status
-      id
       description
       created_at
     }
