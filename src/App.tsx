@@ -1,9 +1,9 @@
 import React from 'react';
-import { MainContainer } from 'components';
+import { RouterContainer } from 'components';
 import './styles/index.scss';
 
 function App(): JSX.Element {
-  return <MainContainer />;
+  return <RouterContainer />;
 }
 
 export default App;

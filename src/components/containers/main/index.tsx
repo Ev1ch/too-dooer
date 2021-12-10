@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useMutation, useSubscription } from '@apollo/client';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ADD_TODO, DELETE_TODO, EDIT_TODO, SUBSCRIBE_TODOS } from 'services';
-import { MainPage, OfflineContainer } from 'components';
+import { MainPage } from 'components';
 import { INewTodoItem, ITodoItem } from 'types';
-import { TodoStatuses, ApolloErrors } from 'common';
+import { TodoStatuses, ApolloErrors, Routes } from 'common';
 
 function MainContainer(): JSX.Element {
+  const navigate = useNavigate();
+  const location = useLocation();
+  location.state = { fromRouter: true };
   const { data } = useSubscription<{ todos: ITodoItem[] }>(SUBSCRIBE_TODOS);
   const [deleteTodo] = useMutation(DELETE_TODO);
   const [editTodo] = useMutation(EDIT_TODO);
   const [addTodo] = useMutation(ADD_TODO);
-  const [isOffline, setIsOffline] = useState(false);
 
   const currentDate = new Date();
 
@@ -24,7 +27,7 @@ function MainContainer(): JSX.Element {
         isUpdated = false;
 
         if (error.message === ApolloErrors.FETCH_FAIL) {
-          setIsOffline(true);
+          navigate(Routes.OFFLINE, { state: { fromRouter: true } });
         }
       });
     }
@@ -41,7 +44,7 @@ function MainContainer(): JSX.Element {
         isDeleted = false;
 
         if (error.message === ApolloErrors.FETCH_FAIL) {
-          setIsOffline(true);
+          navigate(Routes.OFFLINE, { state: { fromRouter: true } });
         }
       });
     }
@@ -62,7 +65,7 @@ function MainContainer(): JSX.Element {
         isEdited = false;
 
         if (error.message === ApolloErrors.FETCH_FAIL) {
-          setIsOffline(true);
+          navigate(Routes.OFFLINE, { state: { fromRouter: true } });
         }
       });
     }
@@ -84,16 +87,14 @@ function MainContainer(): JSX.Element {
       isAdded = false;
 
       if (error.message === ApolloErrors.FETCH_FAIL) {
-        setIsOffline(true);
+        navigate(Routes.OFFLINE, { state: { fromRouter: true } });
       }
     });
 
     return isAdded;
   };
 
-  return isOffline ? (
-    <OfflineContainer />
-  ) : (
+  return (
     <MainPage
       currentDate={currentDate}
       onTodoStateChange={onTodoStateChange}
