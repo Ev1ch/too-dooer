@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Loader, NotLoggedContainer } from 'components';
 import { authorizeClient } from 'services/apollo';
@@ -9,6 +9,7 @@ interface IPrivateRouteProps {
 
 function PrivateRoute({ element }: IPrivateRouteProps): JSX.Element {
   const { isAuthenticated, loginWithRedirect, isLoading, getIdTokenClaims } = useAuth0();
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -16,11 +17,14 @@ function PrivateRoute({ element }: IPrivateRouteProps): JSX.Element {
     }
 
     if (isAuthenticated) {
-      getIdTokenClaims().then(({ __raw: token, sub: id }) => authorizeClient(token, id));
+      getIdTokenClaims().then(({ __raw: token }) => {
+        authorizeClient(token);
+        setIsReady(true);
+      });
     }
-  }, [isLoading, isAuthenticated]);
+  }, [isLoading, isAuthenticated, getIdTokenClaims, loginWithRedirect]);
 
-  return isLoading ? <Loader state={true} /> : isAuthenticated ? element : <NotLoggedContainer />;
+  return !isReady ? <Loader state={true} /> : isAuthenticated ? element : <NotLoggedContainer />;
 }
 
 export default PrivateRoute;

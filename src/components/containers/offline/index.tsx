@@ -11,7 +11,7 @@ function OfflineContainer(): JSX.Element {
     if (!location.state?.fromRouter) {
       navigate(Routes.MAIN);
     }
-  }, []);
+  }, [navigate, location.state?.fromRouter]);
 
   return <ErrorPage error="You are currently offline. Check connection." />;
 }
