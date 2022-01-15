@@ -1,0 +1,13 @@
+.loader {
+  display: none;
+  position: absolute;
+  backdrop-filter: blur(1px);
+
+  &Spinner {
+    margin: auto;
+  }
+
+  &Active {
+    display: flex;
+  }
+}

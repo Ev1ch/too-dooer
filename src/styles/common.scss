@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1024px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+
+  &-track {
+    background-color: var(--light-color);
+  }
+
+  &-thumb {
+    background-color: #888;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: var(--dark-color);
+    }
+  }
+}

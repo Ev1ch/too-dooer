@@ -1,0 +1,17 @@
+.button {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 26px;
+  font: 400 14px var(--base-font-family);
+  color: var(--contrast-light-color);
+  border: none;
+  background-color: var(--accent-color);
+  transition: var(--base-time);
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+  }
+}

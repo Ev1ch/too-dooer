@@ -1,0 +1,27 @@
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 2px solid var(--light-color);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--base-time);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &Icon {
+    transition: var(--base-time);
+    opacity: 0;
+  }
+
+  &Checked {
+    .checkboxIcon {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    border: 2px solid var(--dark-color);
+  }
+}

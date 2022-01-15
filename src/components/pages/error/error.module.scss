@@ -1,0 +1,15 @@
+.main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+
+  .container {
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+
+    .title {
+      font: 700 50px var(--base-font-family);
+    }
+  }
+}

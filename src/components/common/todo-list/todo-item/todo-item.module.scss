@@ -1,0 +1,117 @@
+.todoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  &Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--base-time);
+  }
+
+  &Information {
+    flex-grow: 1;
+  }
+
+  &Title {
+    padding: 6px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font: 500 18px var(--base-font-family);
+    color: var(--dark-color);
+    transition: var(--base-time);
+    cursor: pointer;
+
+    &Editor {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+
+  &Description {
+    padding: 6px;
+    cursor: pointer;
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+      font: 600 14px var(--base-font-family);
+      color: var(--light-color);
+    }
+
+    &Editor {
+      font-weight: 600;
+      color: var(--light-color);
+    }
+  }
+
+  &Checkbox {
+    margin-top: 2px;
+  }
+
+  &Button {
+    background: none;
+    border: none;
+    margin-top: 4px;
+    padding: 0;
+    cursor: pointer;
+    transition: var(--base-time);
+    filter: grayscale(1);
+
+    &:hover {
+      filter: none;
+      transform: scale(1.02);
+    }
+  }
+
+  &Done {
+    align-items: center;
+
+    .todoItem {
+      &Title {
+        margin-bottom: 0;
+        color: var(--light-color);
+      }
+
+      &Description {
+        display: none;
+      }
+
+      &Button {
+        opacity: 0.5;
+
+        &:hover {
+          transform: none;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  &Editor {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid var(--light-color);
+    transition: var(--base-time);
+
+    &:focus {
+      border: 1px solid var(--dark-color);
+      color: var(--dark-color);
+    }
+  }
+
+  &Focused {
+    .todoItem {
+      &Header {
+        margin-bottom: 4px;
+      }
+
+      &Description {
+        padding: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.addButton {
+  height: 56px;
+  width: 56px;
+  background-color: var(--accent-color);
+  display: inline-block;
+  color: var(--lighter-color);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  border: none;
+  font-family: var(--base-font-family);
+  padding: 18px;
+  transition: var(--base-time);
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}

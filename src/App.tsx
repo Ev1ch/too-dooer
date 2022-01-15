@@ -1,11 +1,9 @@
 import React from 'react';
+import { RouterContainer } from 'components';
+import './styles/index.scss';
 
-function App() {
-  return (
-    <div>
-      <h1>App</h1>
-    </div>
-  );
+function App(): JSX.Element {
+  return <RouterContainer />;
 }
 
 export default App;

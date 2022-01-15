@@ -1,0 +1,14 @@
+.textarea {
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid var(--light-color);
+  transition: var(--base-time);
+  font: 400 14px var(--base-font-family);
+  color: var(--dark-color);
+  resize: none;
+
+  &:focus {
+    border-color: var(--dark-color);
+  }
+}
